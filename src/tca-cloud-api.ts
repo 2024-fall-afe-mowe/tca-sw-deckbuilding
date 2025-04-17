@@ -8,8 +8,13 @@ export const saveGameToCloud = async (
   , gameResult: GameResult
 ) => {
 
+    const trimmedLowercaseEmail = email
+      .trim()
+      .toLowerCase()
+    ;
+
     // Bail if no email provided ! ! !
-    if (email.length === 0) {
+    if (trimmedLowercaseEmail.length === 0) {
       return;
     }
 
@@ -17,7 +22,7 @@ export const saveGameToCloud = async (
       
       // Store everything in lowercase, makes email in
       // app case insensitive ! ! !
-      pk: email.toLowerCase()
+      pk: trimmedLowercaseEmail
       , sk: `${appName}#${timestamp}`
   
       , ts: timestamp
@@ -58,13 +63,18 @@ export const saveGameToCloud = async (
   
   export const loadGamesFromCloud = async (email: string, appName: string) => {
       
+    const trimmedLowercaseEmail = email
+      .trim()
+      .toLowerCase()
+    ;
+    
     // Bail if no email provided ! ! !
-    if (email.length === 0) {
+    if (trimmedLowercaseEmail.length === 0) {
       return;
     }
 
     // Use lowercase email since saveGameToCloud always saves with lowercase email ! ! !
-    const url = `https://32wop75hhc.execute-api.us-east-1.amazonaws.com/prod/data/?user=${email.toLowerCase()}&game=${appName}`;
+    const url = `https://32wop75hhc.execute-api.us-east-1.amazonaws.com/prod/data/?user=${trimmedLowercaseEmail}&game=${appName}`;
     
     console.log("url", url);
     
