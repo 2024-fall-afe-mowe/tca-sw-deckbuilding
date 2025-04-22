@@ -61,7 +61,10 @@ export const saveGameToCloud = async (
     );
   };
   
-  export const loadGamesFromCloud = async (email: string, appName: string) => {
+  export const loadGamesFromCloud = async (
+    email: string
+    , appName: string
+  ) => {
       
     const trimmedLowercaseEmail = email
       .trim()
